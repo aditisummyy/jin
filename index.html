@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flipbook</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+ body {
+  margin: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+#intro {
+  position: fixed;
+  inset: 0;
+}
+
+#intro video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#openBtn {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 32px;
+  font-size: 18px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#flipbook-container {
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#flipbook {
+  width: 800px;
+  height: 500px;
+}
+
+.page img {
+  width: 100%;
+  height: 100%;
+}
+
+</style>
+
+<body>
+
+<div id="intro">
+  <video autoplay loop muted>
+    <source src="TEASER.mp4" type="video/mp4">
+  </video>
+
+  <audio id="bgAudio" loop>
+    <source src="aud/audio.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="openBtn">OPEN INVITATION</button>
+</div>
+
+<div id="flipbook-container">
+  <div id="flipbook">
+    <div class="page"><img src="ad/1.png"></div>
+    <div class="page"><img src="ad/2.png"></div>
+    <div class="page"><img src="ad/3.png"></div>
+    <div class="page"><img src="ad/4.png"></div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+
+<script>
+$(document).ready(function () {
+
+  const audio = document.getElementById("bgAudio");
+
+  $("#openBtn").on("click", function () {
+
+    // Start audio (user gesture ✔)
+    audio.play();
+
+    // Hide video intro
+    $("#intro").fadeOut(600);
+
+    // Show flipbook
+    $("#flipbook-container").css("display", "flex").hide().fadeIn(600, function () {
+
+      $("#flipbook").turn({
+        width: 800,
+        height: 500,
+        autoCenter: true
+      });
+
+    });
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
