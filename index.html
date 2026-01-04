@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flipbook</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- TEASER SCREEN -->
+  <div id="intro">
+    <video autoplay loop muted playsinline>
+      <source src="TEASER.mp4" type="video/mp4">
+    </video>
+
+    <button id="openBtn">OPEN INVITATION</button>
+  </div>
+
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bgAudio" loop>
+    <source src="aud/audio.mpeg" type="audio/mpeg">
+  </audio>
+
+  <!-- FLIPBOOK -->
+  <div id="flipbook-container">
+    <div id="flipbook">
+      <div class="page"><img src="ad/1.png"></div>
+      <div class="page"><img src="ad/2.png"></div>
+      <div class="page"><img src="ad/3.png"></div>
+      <div class="page"><img src="ad/4.png"></div>
+    </div>
+  </div>
+
+  <!-- LIBRARIES -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+
+  <!-- LOGIC -->
+  <script>
+    $(document).ready(function () {
+
+      const audio = document.getElementById("bgAudio");
+
+      $("#openBtn").on("click", function () {
+
+        // start music (only reliable way)
+        audio.play().catch(() => {});
+
+        // hide teaser
+        $("#intro").fadeOut(500);
+
+        // show flipbook
+        $("#flipbook-container")
+          .css("display", "flex")
+          .hide()
+          .fadeIn(500, function () {
+
+            $("#flipbook").turn({
+              width: 800,
+              height: 500,
+              autoCenter: true,
+              display: "double",
+              elevation: 50,
+              gradients: true
+            });
+
+          });
+      });
+
+    });
+  </script>
+
+</body>
+</html>
+</body>
+</html>
+
+
